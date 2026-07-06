@@ -13,6 +13,7 @@
 | BUG-03 | FR-06 | Thêm vào giỏ thành công sản phẩm với số lượng 0 | Critical | Open |
 | BUG-04 | FR-06 | Thêm vào giỏ thành công sản phẩm với số lượng -5 | Critical | Open |
 | BUG-05 | FR-06 | Nhập số lượng là 1.5 và thêm vào giỏ thành công với số lượng 1 | Critical | Open |
+| BUG-06 | FR-06 | Để trống ô số lượng và thêm vào giỏ thành công | Critical | Open |
 ---
 
 ## BUG-01
@@ -169,6 +170,38 @@
 **Screenshot:**
 > ![BUG-05](reference/BUG-05a.png)
 > ![BUG-05](reference/BUG-05b.png)
+
+---
+
+## BUG-06
+
+- **Feature:** FR-06 — Xem chi tiết sản phẩm (Product Detail View)
+- **Title:**  Để trống ô số lượng và thêm vào giỏ thành công
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B5
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Đăng nhập với quyền User Test
+2. Nhấn vào trang chi tiết sản phẩm
+3. Để trống ô số lượng
+4. Nhấn nút thêm vào giỏ hàng
+5. Sản phẩm vẫn được thêm vào giỏ
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+| Quantity ||
+
+**Expected result:**
+> Không cho thêm vào giỏ, thông báo lỗi
+
+**Actual result:**
+> Sản phẩm được thêm vào giỏ
+
+**Screenshot:**
+> ![BUG-06](reference/BUG-06.png)
 
 ---
 
