@@ -18,6 +18,7 @@
 | BUG-08 | FR-10 | Admin không thể chuyển trạng thái đơn hàng từ Shipping sang Canceled | Critical | Open |
 | BUG-09 | FR-10 | User có thể tự ý hủy đơn hàng đang ở trạng thái Shipping | Critical | Open |
 | BUG-10 | FR-14 | Admin có thể tạo danh mục với tên để trống | Critical | Open |
+| BUG-11 | FR-14 | Admin có thể tạo danh mục với tên là khoảng trắng | Critical | Open |
 ---
 
 ## BUG-01
@@ -343,5 +344,39 @@
 
 **Screenshot:**
 > ![BUG-10](reference/BUG-10.png)
+
+---
+
+## BUG-11
+
+- **Feature:** FR-14: Category management (CRUD)
+- **Title:**  Admin có thể tạo danh mục với tên là khoảng trắng
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-A3 (FR-14)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "admin@eshop.com",
+    "password": "Admin123!"
+} 
+để lấy token
+3. POST http://localhost:3000/api/categories với Authorization là Bearer Token vừa nhận, body là {"name": "   "}
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|name|   |
+**Expected result:**
+> 400 (kỳ vọng) — hệ thống nên trim và coi là rỗng 
+
+**Actual result:**
+> 200 OK, danh mục được tạo
+
+**Screenshot:**
+> ![BUG-11](reference/BUG-11.png)
 
 ---
