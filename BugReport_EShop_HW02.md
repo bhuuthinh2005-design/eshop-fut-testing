@@ -14,6 +14,7 @@
 | BUG-04 | FR-06 | Thêm vào giỏ thành công sản phẩm với số lượng -5 | Critical | Open |
 | BUG-05 | FR-06 | Nhập số lượng là 1.5 và thêm vào giỏ thành công với số lượng 1 | Critical | Open |
 | BUG-06 | FR-06 | Để trống ô số lượng và thêm vào giỏ thành công | Critical | Open |
+| BUG-07 | FR-06 | Nhập số lượng là 9999999 và thêm vào giỏ thành công | Major | Open |
 ---
 
 ## BUG-01
@@ -168,8 +169,8 @@
 > Sản phẩm được thêm vào giỏ với quantity là 1
 
 **Screenshot:**
-> ![BUG-05](reference/BUG-05a.png)
-> ![BUG-05](reference/BUG-05b.png)
+> ![BUG-05a](reference/BUG-05a.png)
+> ![BUG-05b](reference/BUG-05b.png)
 
 ---
 
@@ -205,37 +206,35 @@
 
 ---
 
-## Ví dụ đã điền (tham khảo cách viết)
+## BUG-07
 
-## BUG-EX
-
-- **Feature:** FR-15 — Quản lý sản phẩm (CRUD)
-- **Title:** Hệ thống vẫn tạo được sản phẩm khi giá = 0
+- **Feature:** FR-06 — Xem chi tiết sản phẩm (Product Detail View)
+- **Title:**  Nhập số lượng là 9999999 và thêm vào giỏ thành công
 - **Severity:** Major
-- **Kỹ thuật phát hiện:** Boundary Value Analysis (boundary `price > 0`, giá trị ON = 0)
-- **Test case liên quan:** TC-BVA-03
-- **Môi trường:** Chrome 126, tài khoản admin@eshop.test
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B6
+- **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
-1. Đăng nhập với quyền Admin.
-2. Vào trang Quản lý sản phẩm → Thêm sản phẩm mới.
-3. Nhập Tên = "Test Product", Giá = 0, Danh mục hợp lệ.
-4. Nhấn Lưu.
+1. Đăng nhập với quyền User Test
+2. Nhấn vào trang chi tiết sản phẩm
+3. Nhập số lượng là 9999999
+4. Nhấn nút thêm vào giỏ hàng
+5. Sản phẩm vẫn được thêm vào giỏ mà không từ chối
 
 **Input test:**
 | Biến | Giá trị |
 |---|---|
-| Tên | Test Product |
-| Giá | 0 |
-| Danh mục | Đồ điện tử |
+| Quantity |9999999|
 
 **Expected result:**
-> Hệ thống từ chối và hiển thị thông báo lỗi "Giá phải lớn hơn 0" (theo ràng buộc `price > 0` trong đặc tả).
+> Từ chối không cho thêm vào giỏ
 
 **Actual result:**
-> Sản phẩm được tạo thành công với giá = 0, hiển thị bình thường trên trang danh sách sản phẩm.
+> Sản phẩm được thêm vào giỏ
 
-**Screenshot / Video:**
-> screenshots/bug-ex-price-zero.png
+**Screenshot:**
+> ![BUG-07](reference/BUG-07.png)
 
-**GitHub Issue:** https://github.com/<org>/eshop-sut/issues/1
+---
+
