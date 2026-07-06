@@ -10,6 +10,7 @@
 |---|---|---|---|---|
 | BUG-01 | FR-06 | Không trả về lỗi khi không truyền id | Minor | Open |
 | BUG-02 | FR-06 | Nhấn nút thêm vào giỏ hàng phải double click, nhấn một lần không nhận | Critical | Open |
+| BUG-03 | FR-06 | Thêm vào giỏ thành công sản phẩm với số lượng 0 | Critical | Open |
 
 ---
 
@@ -38,7 +39,6 @@
 
 **Screenshot:**
 > ![BUG-01](reference/BUG-01.png)
-
 
 
 ---
@@ -71,6 +71,38 @@
 **Screenshot:**
 > ![BUG-02](reference/BUG-02.png)
 
+
+---
+
+## BUG-03
+
+- **Feature:** FR-06 — Xem chi tiết sản phẩm (Product Detail View)
+- **Title:** Thêm vào giỏ thành công sản phẩm với số lượng 0
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B2
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Đăng nhập với quyền User Test
+2. Nhấn vào trang chi tiết sản phẩm
+3. Chọn số lượng là 0
+4. Nhấn nút thêm vào giỏ hàng
+5. Sản phẩm vẫn được thêm vào giỏ
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+| Quantity |0|
+
+**Expected result:**
+> Không cho thêm vào giỏ, thông báo lỗi
+
+**Actual result:**
+> Sản phẩm được thêm vào giỏ
+
+**Screenshot:**
+> ![BUG-03](reference/BUG-03.png)
 
 ---
 
