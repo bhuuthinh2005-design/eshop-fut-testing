@@ -523,6 +523,40 @@
 
 ---
 
+## BUG-16
+
+- **Feature:** FR-14: Category management (CRUD)
+- **Title:**  User có thể xóa danh mục
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B5 (FR-14)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "test@eshop.com",
+    "password": "Test123!"
+} 
+để lấy token
+3. DELETE http://localhost:3000/api/categories/:id với Authorization là Bearer Token vừa nhận
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|||
+**Expected result:**
+> 403 Forbidden
+
+**Actual result:**
+> 200 OK
+
+**Screenshot:**
+> ![BUG-16](reference/BUG-16.png)
+
+---
+
 ## BUG-17
 
 - **Feature:** FR-14: Category management (CRUD)
