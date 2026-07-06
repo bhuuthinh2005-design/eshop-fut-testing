@@ -22,6 +22,7 @@
 | BUG-12 | FR-14 | Admin có thể tạo danh mục khi không có trường name | Critical | Open |
 | BUG-13 | FR-14 | Admin có thể tạo danh mục với tên là dạng số | Critical | Open |
 | BUG-14 | FR-14 | Admin có thể tạo danh mục với tên bị trùng với danh mục đã có | Critical | Open |
+| BUG-15 | FR-14 | User có thể tạo danh mục | Critical | Open |
 ---
 
 ## BUG-01
@@ -483,5 +484,39 @@
 
 **Screenshot:**
 > ![BUG-14](reference/BUG-14.png)
+
+---
+
+## BUG-15
+
+- **Feature:** FR-14: Category management (CRUD)
+- **Title:**  User có thể tạo danh mục
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B2 (FR-14)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "test@eshop.com",
+    "password": "Test123!"
+} 
+để lấy token
+3. POST http://localhost:3000/api/categories với Authorization là Bearer Token vừa nhận, body là {"name": "kkk"}
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|name|kkk|
+**Expected result:**
+> 403 Forbidden
+
+**Actual result:**
+> 200 OK, danh mục được tạo
+
+**Screenshot:**
+> ![BUG-15](reference/BUG-15.png)
 
 ---
