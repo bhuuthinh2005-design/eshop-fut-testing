@@ -24,6 +24,7 @@
 | BUG-14 | FR-14 | Admin có thể tạo danh mục với tên bị trùng với danh mục đã có | Critical | Open |
 | BUG-15 | FR-14 | User có thể tạo danh mục | Critical | Open |
 | BUG-16 | FR-14 | User có thể xóa danh mục | Critical | Open |
+| BUG-17 | FR-14 | User có thể cập nhật danh mục | Critical | Open |
 ---
 
 ## BUG-01
@@ -522,13 +523,13 @@
 
 ---
 
-## BUG-16
+## BUG-17
 
 - **Feature:** FR-14: Category management (CRUD)
-- **Title:**  User có thể xóa danh mục
+- **Title:**  User có thể cập nhật danh mục
 - **Severity:** Critical
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-B5 (FR-14)
+- **Test case liên quan:** TC-B6 (FR-14)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -539,12 +540,12 @@
     "password": "Test123!"
 } 
 để lấy token
-3. DELETE http://localhost:3000/api/categories/:id với Authorization là Bearer Token vừa nhận
+3. PUT http://localhost:3000/api/categories/:id với Authorization là Bearer Token vừa nhận, body là {"name": "Máy tính"}
 
 **Input test:**
 | Biến | Giá trị |
 |---|---|
-|||
+|name|Máy tính|
 **Expected result:**
 > 403 Forbidden
 
@@ -552,6 +553,6 @@
 > 200 OK
 
 **Screenshot:**
-> ![BUG-16](reference/BUG-16.png)
+> ![BUG-17](reference/BUG-17.png)
 
 ---
