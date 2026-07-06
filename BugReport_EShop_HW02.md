@@ -15,6 +15,7 @@
 | BUG-05 | FR-06 | Nhập số lượng là 1.5 và thêm vào giỏ thành công với số lượng 1 | Critical | Open |
 | BUG-06 | FR-06 | Để trống ô số lượng và thêm vào giỏ thành công | Critical | Open |
 | BUG-07 | FR-06 | Nhập số lượng là 9999999 và thêm vào giỏ thành công | Major | Open |
+| BUG-08 | FR-10 | Admin không thể chuyển trạng thái đơn hàng từ Shipping sang Canceled | Major | Open |
 ---
 
 ## BUG-01
@@ -23,7 +24,7 @@
 - **Title:** Không trả về lỗi khi không truyền id (http://localhost:5173/product/)
 - **Severity:** Minor
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-A6 
+- **Test case liên quan:** TC-A6 (FR-06)
 - **Môi trường:** Trình duyệt web
 
 **Steps to reproduce:**
@@ -52,7 +53,7 @@
 - **Title:** Nhấn nút thêm vào giỏ hàng phải double click, nhấn một lần không nhận
 - **Severity:** Critical
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-B1
+- **Test case liên quan:** TC-B1 (FR-06)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -83,7 +84,7 @@
 - **Title:** Thêm vào giỏ thành công sản phẩm với số lượng 0
 - **Severity:** Critical
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-B2
+- **Test case liên quan:** TC-B2 (FR-06)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -115,7 +116,7 @@
 - **Title:** Thêm vào giỏ thành công sản phẩm với số lượng -5
 - **Severity:** Critical
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-B2b
+- **Test case liên quan:** TC-B2b (FR-06)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -147,7 +148,7 @@
 - **Title:** Nhập số lượng là 1.5 và thêm vào giỏ thành công với số lượng 1
 - **Severity:** Critical
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-B3
+- **Test case liên quan:** TC-B3 (FR-06)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -180,7 +181,7 @@
 - **Title:**  Để trống ô số lượng và thêm vào giỏ thành công
 - **Severity:** Critical
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-B5
+- **Test case liên quan:** TC-B5 (FR-06)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -212,7 +213,7 @@
 - **Title:**  Nhập số lượng là 9999999 và thêm vào giỏ thành công
 - **Severity:** Major
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-B6
+- **Test case liên quan:** TC-B6 (FR-06)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -235,6 +236,36 @@
 
 **Screenshot:**
 > ![BUG-07](reference/BUG-07.png)
+
+---
+
+## BUG-08
+
+- **Feature:** FR-10: Trạng thái Đơn hàng (Order State Machine)
+- **Title:**  Admin không thể chuyển trạng thái đơn hàng từ Shipping sang Canceled 
+- **Severity:** Major
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-A6 (FR-10)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login để lấy token
+3. PUT http://localhost:3000/api/admin/orders/:id/status với Authorization là Bearer Token vừa nhận, body là {"status": "canceled"}, :id là id của đơn hàng, trạng thái đơn hàng đang là shipping
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+| status |canceled|
+
+**Expected result:**
+> 200 OK, order → canceled
+
+**Actual result:**
+> 400 — chuyển đổi không hợp lệ
+
+**Screenshot:**
+> ![BUG-08](reference/BUG-08.png)
 
 ---
 
