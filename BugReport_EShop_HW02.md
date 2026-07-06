@@ -27,6 +27,7 @@
 | BUG-17 | FR-14 | User có thể cập nhật danh mục | Critical | Open |
 | BUG-18 | FR-14 | Khi xóa danh mục chứa sản phẩm, tất cả sản phẩm chuyển sang danh mục có id kế tiếp | Critical | Open |
 | BUG-19 | FR-14 | Admin có thể xóa danh mục với id không tồn tại | Minor | Open |
+| BUG-19 | FR-14 | Admin có thể xóa danh mục với id là số âm | Minor | Open |
 ---
 
 ## BUG-01
@@ -633,7 +634,7 @@
 - **Title:**  Admin có thể xóa danh mục với id không tồn tại
 - **Severity:** Minor
 - **Kỹ thuật phát hiện:** Domain Testing
-- **Test case liên quan:** TC-C2 (FR-14)
+- **Test case liên quan:** TC-C3 (FR-14)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
@@ -658,5 +659,39 @@
 
 **Screenshot:**
 > ![BUG-19](reference/BUG-19.png)
+
+---
+
+## BUG-20
+
+- **Feature:** FR-14: Category management (CRUD)
+- **Title:**  Admin có thể xóa danh mục với id là số âm
+- **Severity:** Minor
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-C4 (FR-14)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "admint@eshop.com",
+    "password": "Admin123!"
+} 
+để lấy token
+3. DELETE http://localhost:3000/api/categories/:id với Authorization là Bearer Token vừa nhận, id là số âm
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|id|-1|
+**Expected result:**
+>  400/404
+
+**Actual result:**
+> 200 OK
+
+**Screenshot:**
+> ![BUG-20](reference/BUG-20.png)
 
 ---
