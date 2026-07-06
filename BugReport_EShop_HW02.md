@@ -23,6 +23,7 @@
 | BUG-13 | FR-14 | Admin có thể tạo danh mục với tên là dạng số | Critical | Open |
 | BUG-14 | FR-14 | Admin có thể tạo danh mục với tên bị trùng với danh mục đã có | Critical | Open |
 | BUG-15 | FR-14 | User có thể tạo danh mục | Critical | Open |
+| BUG-16 | FR-14 | User có thể xóa danh mục | Critical | Open |
 ---
 
 ## BUG-01
@@ -518,5 +519,39 @@
 
 **Screenshot:**
 > ![BUG-15](reference/BUG-15.png)
+
+---
+
+## BUG-16
+
+- **Feature:** FR-14: Category management (CRUD)
+- **Title:**  User có thể xóa danh mục
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B5 (FR-14)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "test@eshop.com",
+    "password": "Test123!"
+} 
+để lấy token
+3. DELETE http://localhost:3000/api/categories/:id với Authorization là Bearer Token vừa nhận
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|||
+**Expected result:**
+> 403 Forbidden
+
+**Actual result:**
+> 200 OK
+
+**Screenshot:**
+> ![BUG-16](reference/BUG-16.png)
 
 ---
