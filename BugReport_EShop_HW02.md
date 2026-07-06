@@ -9,7 +9,7 @@
 | # | Feature (FR-xx) | Title | Severity | Trạng thái |
 |---|---|---|---|---|
 | BUG-01 | FR-06 | Không trả về lỗi khi không truyền id | Minor | Open |
-| BUG-02 | | | | |
+| BUG-02 | FR-06 | Nhấn nút thêm vào giỏ hàng phải double click, nhấn một lần không nhận | Critical | Open |
 
 ---
 
@@ -36,7 +36,7 @@
 **Actual result:**
 > Không trả về lỗi
 
-**Screenshot / Video:**
+**Screenshot:**
 > ![BUG-01](reference/BUG-01.png)
 
 
@@ -45,33 +45,32 @@
 
 ## BUG-02
 
-- **Feature:**
-- **Title:**
-- **Severity:**
-- **Kỹ thuật phát hiện:**
-- **Test case liên quan:**
-- **Môi trường:**
+- **Feature:** FR-06 — Xem chi tiết sản phẩm (Product Detail View)
+- **Title:** Nhấn nút thêm vào giỏ hàng phải double click, nhấn một lần không nhận
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B1
+- **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
-1.
-2.
-3.
+1. Đăng nhập với quyền User Test
+2. Nhấn vào trang chi tiết sản phẩm
+3. Nhấn nút thêm vào giỏ hàng
 
 **Input test:**
 | Biến | Giá trị |
 |---|---|
-| | |
+| Nút thêm vào giỏ hàng | |
 
 **Expected result:**
->
+> Nhấn một lần phải thêm ngay
 
 **Actual result:**
->
+> Phải nhấn double-click mới thêm
 
-**Screenshot / Video:**
->
+**Screenshot:**
+> ![BUG-02](reference/BUG-02.png)
 
-**GitHub Issue:**
 
 ---
 
