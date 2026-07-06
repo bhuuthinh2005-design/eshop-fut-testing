@@ -15,7 +15,8 @@
 | BUG-05 | FR-06 | Nhập số lượng là 1.5 và thêm vào giỏ thành công với số lượng 1 | Critical | Open |
 | BUG-06 | FR-06 | Để trống ô số lượng và thêm vào giỏ thành công | Critical | Open |
 | BUG-07 | FR-06 | Nhập số lượng là 9999999 và thêm vào giỏ thành công | Major | Open |
-| BUG-08 | FR-10 | Admin không thể chuyển trạng thái đơn hàng từ Shipping sang Canceled | Major | Open |
+| BUG-08 | FR-10 | Admin không thể chuyển trạng thái đơn hàng từ Shipping sang Canceled | Critical | Open |
+| BUG-09 | FR-10 | User có thể tự ý hủy đơn hàng đang ở trạng thái Shipping | Critical | Open |
 ---
 
 ## BUG-01
@@ -243,20 +244,26 @@
 
 - **Feature:** FR-10: Trạng thái Đơn hàng (Order State Machine)
 - **Title:**  Admin không thể chuyển trạng thái đơn hàng từ Shipping sang Canceled 
-- **Severity:** Major
+- **Severity:** Critical
 - **Kỹ thuật phát hiện:** Domain Testing
 - **Test case liên quan:** TC-A6 (FR-10)
 - **Môi trường:** Trình duyệt Web
 
 **Steps to reproduce:**
 1. Vào phần mềm Postman
-2. POST http://localhost:3000/api/login để lấy token
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "admin@eshop.com",
+    "password": "Admin123!"
+} 
+để lấy token
 3. PUT http://localhost:3000/api/admin/orders/:id/status với Authorization là Bearer Token vừa nhận, body là {"status": "canceled"}, :id là id của đơn hàng, trạng thái đơn hàng đang là shipping
 
 **Input test:**
 | Biến | Giá trị |
 |---|---|
-| status |canceled|
+|current status |shipping|
+|new status |canceled|
 
 **Expected result:**
 > 200 OK, order → canceled
@@ -269,3 +276,37 @@
 
 ---
 
+## BUG-09
+
+- **Feature:** FR-10: Trạng thái Đơn hàng (Order State Machine)
+- **Title:**  User có thể tự ý hủy đơn hàng đang ở trạng thái Shipping 
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-B3 (FR-10)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "test@eshop.com",
+    "password": "Test1234!"
+} 
+để lấy token
+3. PUT http://localhost:3000/api/orders/:id/cancel với Authorization là Bearer Token vừa nhận, :id là id của đơn hàng, trạng thái đơn hàng đang là shipping
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|current status |shipping|
+|new status |canceled|
+**Expected result:**
+> 403 (hoặc 400) — User không được tự hủy khi đã shipping 
+
+**Actual result:**
+> 200 OK, order → canceled 
+
+**Screenshot:**
+> ![BUG-09](reference/BUG-09.png)
+
+---
