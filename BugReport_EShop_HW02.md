@@ -25,6 +25,8 @@
 | BUG-15 | FR-14 | User có thể tạo danh mục | Critical | Open |
 | BUG-16 | FR-14 | User có thể xóa danh mục | Critical | Open |
 | BUG-17 | FR-14 | User có thể cập nhật danh mục | Critical | Open |
+| BUG-18 | FR-14 | Khi xóa danh mục chứa sản phẩm, tất cả sản phẩm chuyển sang danh mục có id kế tiếp | Critical | Open |
+| BUG-19 | FR-14 | Admin có thể xóa danh mục với id không tồn tại | Minor | Open |
 ---
 
 ## BUG-01
@@ -588,5 +590,73 @@
 
 **Screenshot:**
 > ![BUG-17](reference/BUG-17.png)
+
+---
+
+## BUG-18
+
+- **Feature:** FR-14: Category management (CRUD)
+- **Title:**  Khi xóa danh mục chứa sản phẩm, tất cả sản phẩm chuyển sang danh mục có id kế tiếp
+- **Severity:** Critical
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-C2 (FR-14)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "admint@eshop.com",
+    "password": "Admin123!"
+} 
+để lấy token
+3. DELETE http://localhost:3000/api/categories/:id với Authorization là Bearer Token vừa nhận, id của danh mục có chứa sản phẩm
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|id|1|
+**Expected result:**
+> Cần quan sát hành vi thực tế (chặn xóa / xóa và để sản phẩm mồ côi / lỗi 500)
+
+**Actual result:**
+> 200 OK, sản phẩm chuyển sang của danh mục có id là 2
+
+**Screenshot:**
+> ![BUG-18](reference/BUG-18.png)
+
+---
+
+## BUG-19
+
+- **Feature:** FR-14: Category management (CRUD)
+- **Title:**  Admin có thể xóa danh mục với id không tồn tại
+- **Severity:** Minor
+- **Kỹ thuật phát hiện:** Domain Testing
+- **Test case liên quan:** TC-C2 (FR-14)
+- **Môi trường:** Trình duyệt Web
+
+**Steps to reproduce:**
+1. Vào phần mềm Postman
+2. POST http://localhost:3000/api/login với body
+{
+    "email": "admint@eshop.com",
+    "password": "Admin123!"
+} 
+để lấy token
+3. DELETE http://localhost:3000/api/categories/:id với Authorization là Bearer Token vừa nhận, id không tồn tại
+
+**Input test:**
+| Biến | Giá trị |
+|---|---|
+|id|999999|
+**Expected result:**
+>  404 Not Found 
+
+**Actual result:**
+> 200 OK
+
+**Screenshot:**
+> ![BUG-19](reference/BUG-19.png)
 
 ---
